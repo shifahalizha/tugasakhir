@@ -7,12 +7,16 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('indo/downloadExcel', 'Indo::downloadExcel');
-$routes->get('indo/filter', 'indo::filter');
+$routes->get('jawabarat/downloadExcel', 'jawabarat::downloadExcel');
 $routes->resource('home');
 $routes->resource('Indo');
+$routes->resource('jawabarat');
 $routes->resource('login');
 $routes->resource('register');
-$routes->resource('admin');
+$routes->group('', ['filter' => 'authMiddleware'], function($routes) {
+    $routes->resource('admin');
+    $routes->resource('adminjakarta');
+    $routes->resource('history');
+    $routes->resource('adminjabar');
+});
 $routes->resource('logout');
-$routes->resource('history');
-$routes->resource('adminjakarta');
